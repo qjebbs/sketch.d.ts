@@ -1534,11 +1534,11 @@ declare namespace _Sketch {
     /** The way to save the document. */
     enum SaveMode {
         /** Overwrites a document’s file with the document’s contents */
-        Save,
+        Save = 'Save',
         /** Writes a document’s contents to a new file and then changes the document’s current location to point to the just-written file */
-        SaveAs,
+        SaveAs = 'SaveAs',
         /** Writes a document’s contents to a new file without changing the document’s current location to point to the new file. */
-        SaveTo,
+        SaveTo = 'SaveTo',
     }
     /** 
      * Enumeration of the available sketch types. 
@@ -1548,63 +1548,63 @@ declare namespace _Sketch {
      * mentioned here: https://developer.sketch.com/reference/api/#create-a-new-group
     */
     enum Types {
-        Library,
-        Style,
-        Fill,
-        GradientAsset,
-        ImageData,
-        Image,
-        Shadow,
-        Document,
-        ColorAsset,
-        SharedStyle,
-        Override,
-        Group,
-        Artboard,
-        Border,
-        BorderOptions,
-        Shape,
-        Blur,
-        Gradient,
-        SymbolMaster,
-        DataOverride,
-        Text,
-        HotSpot,
-        Page,
-        ImportableObject,
-        Flow,
-        SymbolInstance,
-        ShapePath,
-        GradientStop,
-        Slice,
-        ExportFormat,
-        CurvePoint,
+        Library = 'Library',
+        Style = 'Style',
+        Fill = 'Fill',
+        GradientAsset = 'GradientAsset',
+        ImageData = 'ImageData',
+        Image = 'Image',
+        Shadow = 'Shadow',
+        Document = 'Document',
+        ColorAsset = 'ColorAsset',
+        SharedStyle = 'SharedStyle',
+        Override = 'Override',
+        Group = 'Group',
+        Artboard = 'Artboard',
+        Border = 'Border',
+        BorderOptions = 'BorderOptions',
+        Shape = 'Shape',
+        Blur = 'Blur',
+        Gradient = 'Gradient',
+        SymbolMaster = 'SymbolMaster',
+        DataOverride = 'DataOverride',
+        Text = 'Text',
+        HotSpot = 'HotSpot',
+        Page = 'Page',
+        ImportableObject = 'ImportableObject',
+        Flow = 'Flow',
+        SymbolInstance = 'SymbolInstance',
+        ShapePath = 'ShapePath',
+        GradientStop = 'GradientStop',
+        Slice = 'Slice',
+        ExportFormat = 'ExportFormat',
+        CurvePoint = 'CurvePoint',
     }
     /** Enumeration of the type of Shared Style. */
     enum ShapeType {
-        Rectangle,
-        Oval,
-        Triangle,
-        Polygon,
-        Star,
-        Custom,
+        Rectangle = 'Rectangle',
+        Oval = 'Oval',
+        Triangle = 'Triangle',
+        Polygon = 'Polygon',
+        Star = 'Star',
+        Custom = 'Custom',
     }
     /** Enumeration of the type of point types. */
     enum PointType {
-        Undefined,
-        Straight,
-        Mirrored,
-        Asymmetric,
-        Disconnected,
+        Undefined = 'Undefined',
+        Straight = 'Straight',
+        Mirrored = 'Mirrored',
+        Asymmetric = 'Asymmetric',
+        Disconnected = 'Disconnected',
     }
     /** Enumeration of the available color space settings. */
     enum ColorSpace {
         /** The default setting */
-        Unmanaged,
+        Unmanaged = 'Unmanaged',
         /** sRGB color profile */
-        sRGB,
+        sRGB = 'sRGB',
         /** Display P3 color profile */
-        P3,
+        P3 = 'P3',
     }
     /** Enumeration of the type of a Gradient. */
     enum GradientType {
@@ -1614,149 +1614,149 @@ declare namespace _Sketch {
          * points of an object and will blend, or transition 
          * into each other.
          */
-        Linear,
+        Linear = 'Linear',
         /**
          * A radial gradient will create an effect where the 
          * transition between color stops will be in a 
          * circular pattern.
          */
-        Radial,
+        Radial = 'Radial',
         /**
          * This effect allows you to create gradients that 
          * sweep around the circumference (measured by the 
          * maximum width or height of a layer) in a clockwise 
          * direction.
          */
-        Angular,
+        Angular = 'Angular',
     }
     /** Enumeration of the line spacing behavior for the text. */
     enum LineSpacing {
         /** Uses min & max line height on paragraph style */
-        constantBaseline,
+        constantBaseline = 'constantBaseline',
         /** Uses MSConstantBaselineTypesetter for fixed line height */
-        variable,
+        variable = 'variable',
     }
     /** Enumeration of the alignments of the text. */
     enum Alignment {
         /** Visually left aligned */
-        left,
+        left = 'left',
         /** Visually right aligned */
-        right,
+        right = 'right',
         /** Visually centered */
-        center,
+        center = 'center',
         /** Fully-justified. The last line in a paragraph is natural-aligned. */
-        justify,
+        justify = 'justify',
     }
     /** Enumeration of the alignments of the text. */
     enum VerticalAlignment {
         /** Visually top aligned */
-        top,
+        top = 'top',
         /** Visually vertically centered */
-        center,
+        center = 'center',
         /** Visually bottom aligned */
-        bottom,
+        bottom = 'bottom',
     }
     /** Enumeration of the type of Shared Style. */
     enum StyleType {
-        Text,
-        Layer,
+        Text = 'Text',
+        Layer = 'Layer',
         /** Unknown indicates the object is broken and Sketch can’t determine the style type. */
-        Unknown,
+        Unknown = 'Unknown',
     }
     /** Enumeration of the types of Library. */
     enum LibraryType {
-        Internal,
-        LocalUser,
-        RemoteUser,
-        RemoteTeam,
-        RemoteThirdParty,
+        Internal = 'Internal',
+        LocalUser = 'LocalUser',
+        RemoteUser = 'RemoteUser',
+        RemoteTeam = 'RemoteTeam',
+        RemoteThirdParty = 'RemoteThirdParty',
     }
     /** Enumeration of the types of Importable Objects. */
     enum ImportableObjectType {
-        Symbol,
-        LayerStyle,
-        TextStyle,
+        Symbol = 'Symbol',
+        LayerStyle = 'LayerStyle',
+        TextStyle = 'TextStyle',
     }
     /** Enumeration of the blending mode. */
     enum BlendingMode {
-        Normal,
-        Darken,
-        Multiply,
-        ColorBurn,
-        Lighten,
-        Screen,
-        ColorDodge,
-        Overlay,
-        SoftLight,
-        HardLight,
-        Difference,
-        Exclusion,
-        Hue,
-        Saturation,
-        Color,
-        Luminosity,
+        Normal = 'Normal',
+        Darken = 'Darken',
+        Multiply = 'Multiply',
+        ColorBurn = 'ColorBurn',
+        Lighten = 'Lighten',
+        Screen = 'Screen',
+        ColorDodge = 'ColorDodge',
+        Overlay = 'Overlay',
+        SoftLight = 'SoftLight',
+        HardLight = 'HardLight',
+        Difference = 'Difference',
+        Exclusion = 'Exclusion',
+        Hue = 'Hue',
+        Saturation = 'Saturation',
+        Color = 'Color',
+        Luminosity = 'Luminosity',
     }
     /** Enumeration of the type of a blur. */
     enum BlurType {
         /** A common blur type that will accurately blur in all directions. */
-        Gaussian,
+        Gaussian = 'Gaussian',
         /** Blur only in one direction, giving the illusion of motion. */
-        Motion,
+        Motion = 'Motion',
         /** Will blur from one particular point out. */
-        Zoom,
+        Zoom = 'Zoom',
         /** This will blur any content that appears behind the layer. */
-        Background,
+        Background = 'Background',
     }
     /** Enumeration of the types of fill. */
     enum FillType {
-        Color,
-        Gradient,
-        Pattern,
+        Color = 'Color',
+        Gradient = 'Gradient',
+        Pattern = 'Pattern',
     }
     /** Enumeration of the types of pattern fill. */
     enum PatternFillType {
-        Tile,
-        Fill,
-        Stretch,
-        Fit,
+        Tile = 'Tile',
+        Fill = 'Fill',
+        Stretch = 'Stretch',
+        Fit = 'Fit',
     }
     /** Enumeration of the positions of a border. */
     enum BorderPosition {
-        Center,
-        Inside,
-        Outside,
+        Center = 'Center',
+        Inside = 'Inside',
+        Outside = 'Outside',
     }
     /** Enumeration of the type of the Arrowhead for line layers. */
     enum Arrowhead {
-        None,
-        OpenArrow,
-        FilledArrow,
-        Line,
-        OpenCircle,
-        FilledCircle,
-        OpenSquare,
-        FilledSquare,
+        None = 'None',
+        OpenArrow = 'OpenArrow',
+        FilledArrow = 'FilledArrow',
+        Line = 'Line',
+        OpenCircle = 'OpenCircle',
+        FilledCircle = 'FilledCircle',
+        OpenSquare = 'OpenSquare',
+        FilledSquare = 'FilledSquare',
     }
     enum LineEnd {
         /** This is the default option that’ll draw the border right to the vector point. */
-        Butt,
+        Butt = 'Butt',
         /** Creates a rounded, semi-circular end to a path that extends past the vector point. */
-        Round,
+        Round = 'Round',
         /** Similar to the rounded cap, but with a straight edges. */
-        Projecting,
+        Projecting = 'Projecting',
     }
     /** Enumeration of the positions of a border. */
     enum LineJoin {
         /** This will simply create an angled, or pointy join. The default setting. */
-        Miter,
+        Miter = 'Miter',
         /** Creates a rounded corner for the border. The radius is relative to the border thickness. */
-        Round,
+        Round = 'Round',
         /** This will create a chamfered edge on the border corner. */
-        Bevel,
+        Bevel = 'Bevel',
     }
     /** Enumeration of the positions of a border. */
     enum INPUT_TYPE {
-        string,
-        selection,
+        string = 'string',
+        selection = 'selection',
     }
 }

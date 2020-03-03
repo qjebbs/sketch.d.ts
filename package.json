@@ -1,0 +1,28 @@
+{
+  "name": "@types/sketch",
+  "version": "0.0.1",
+  "description": "TypeScript definitions for Sketch JavaScript API",
+  "main": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qjebbs/sketch.d.ts.git"
+  },
+  "keywords": [
+    "sketch",
+    "typscript",
+    "api",
+    "definition"
+  ],
+  "author": "Jebbs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qjebbs/sketch.d.ts/issues"
+  },
+  "homepage": "https://github.com/qjebbs/sketch.d.ts#readme",
+  "devDependencies": {
+    "@types/node": "^13.7.7"
+  }
+}

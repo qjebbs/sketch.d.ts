@@ -278,7 +278,7 @@ declare namespace _Sketch {
          * @param object The native Sketch model object to wrap.
          * @returns The wrapped object of the right type (you can check is type with wrappedObject.type), eg. a native document will be wrapped as a Document while a native text layer will be wrapped as a Text.
          */
-        fromNative<T>(object): T;
+        fromNative<T>(object: object): T;
     }
     /**
      * Javascript API for Sketch
@@ -307,7 +307,7 @@ declare namespace _Sketch {
     /** A Sketch document. */
     class Document extends Component {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Document;
+        static fromNative(sketchObject: object): Document;
         /** return a JSON object that represent the component */
         toJSON(): any;
         constructor();
@@ -476,7 +476,7 @@ declare namespace _Sketch {
     /** A Sketch Library. */
     class Library extends Component {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Library;
+        static fromNative(sketchObject: object): Library;
         /** The unique ID of the Library. */
         get id(): string;
         /** The name of the Library. */
@@ -543,7 +543,7 @@ declare namespace _Sketch {
     /** The style of a Layer. */
     class Style extends Component {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Style;
+        static fromNative(sketchObject: object): Style;
         /** The opacity of a Layer, between 0 (transparent) and 1 (opaque). */
         opacity: number;
         /** The blend mode used to determine the composite color. */
@@ -622,7 +622,7 @@ declare namespace _Sketch {
     /** A shared style (either a layer style or a text style). */
     class SharedStyle extends Component {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): SharedStyle;
+        static fromNative(sketchObject: object): SharedStyle;
         /** The unique ID of the Shared Style. */
         id: string;
         /** The type of the Shared Style. */
@@ -800,7 +800,7 @@ declare namespace _Sketch {
     /** A Sketch layer. This is the base class for most of the Sketch components and defines methods to manipulate them. */
     class Layer extends Component {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Layer;
+        static fromNative(sketchObject: object): Layer;
         /** The unique ID of the Layer. */
         id: string;
         /** The name of the Layer */
@@ -880,7 +880,7 @@ declare namespace _Sketch {
     /** A group of layers. It is also an instance of Layer so all the methods defined there are available. */
     class Group extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Group;
+        static fromNative(sketchObject: object): Group;
         /** Create a new Group */
         constructor();
         constructor(options: {
@@ -908,7 +908,7 @@ declare namespace _Sketch {
     /** A Sketch page. It is an instance of both Layer and Group so all the methods defined there are available. */
     class Page extends Group {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Page;
+        static fromNative(sketchObject: object): Page;
         constructor();
         constructor(options: { name: string })
         /**
@@ -931,7 +931,7 @@ declare namespace _Sketch {
     /** A Sketch artboard. It is an instance of both Layer and Group so all the methods defined there are available. */
     class Artboard extends Group {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Artboard;
+        static fromNative(sketchObject: object): Artboard;
         constructor();
         constructor(options: {
             name?: string,
@@ -952,7 +952,7 @@ declare namespace _Sketch {
     /** A shape layer. It is shaped by its layers which have boolean operations between them. */
     class Shape extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Shape;
+        static fromNative(sketchObject: object): Shape;
         constructor();
         constructor(optoins: { name?: string, style?: Style });
         /** The style of the Shape. */
@@ -963,7 +963,7 @@ declare namespace _Sketch {
     /** An image layer. */
     class Image extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Image;
+        static fromNative(sketchObject: object): Image;
         /**
          * Create a new Image.
          * 
@@ -991,7 +991,7 @@ declare namespace _Sketch {
     /** A shape path layer. */
     class ShapePath extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): ShapePath;
+        static fromNative(sketchObject: object): ShapePath;
         /**
          * Create a new ShapePath
          * 
@@ -1034,7 +1034,7 @@ declare namespace _Sketch {
     /** A text layer. */
     class Text extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): Text;
+        static fromNative(sketchObject: object): Text;
         /**
          * Create a new Text
          * @example var text = new Text({
@@ -1068,7 +1068,7 @@ declare namespace _Sketch {
     /** A Symbol master. It is an instance of Artboard (hence of Layer and Group) so all the methods defined there are available. */
     class SymbolMaster extends Artboard {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): SymbolMaster;
+        static fromNative(sketchObject: object): SymbolMaster;
         constructor(options: { name: string });
         /** The unique ID of the Symbol that the master and its instances share. */
         symbolId: string;
@@ -1113,7 +1113,7 @@ declare namespace _Sketch {
     /** A Symbol instance. */
     class SymbolInstance extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): SymbolInstance;
+        static fromNative(sketchObject: object): SymbolInstance;
         /**
          * Create a new Symbol Instance
          * @param options 
@@ -1156,7 +1156,7 @@ declare namespace _Sketch {
     /** A Sketch hotspot. */
     class HotSpot extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): HotSpot;
+        static fromNative(sketchObject: object): HotSpot;
         constructor(options?: {
             name: string,
             flow: {
@@ -1172,7 +1172,7 @@ declare namespace _Sketch {
     /** A Sketch slice. */
     class Slice extends Layer {
         /** returns a wrapped object from a native Sketch model object */
-        static fromNative(sketchObject): HotSpot;
+        static fromNative(sketchObject: object): HotSpot;
     }
     /** A Symbol override. This component is not exposed, it is only returned when accessing the overrides of a Symbol Instance or Symbol Master. The overrides are not available until after the instance is injected into the document. */
     class Override {

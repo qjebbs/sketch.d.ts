@@ -405,6 +405,8 @@ export declare namespace _Sketch {
     }
     /** The style of a Layer. */
     class Style extends Component {
+        /** The unique ID of the Style. */
+        id: string;
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): Style;
         /** The opacity of a Layer, between 0 (transparent) and 1 (opaque). */
@@ -592,7 +594,7 @@ export declare namespace _Sketch {
     class Rectangle extends Component {
         constructor(x: number, y: number, width: number, height: number);
         /** The x coordinate of the top-left corner of the rectangle. Or an object with {x, y, width, height} */
-        x: number | { x: number, y: number, width: number, height: number };
+        x: number;
         /** The y coordinate of the top-left corner of the rectangle. */
         y: number;
         /** The width of the rectangle. */
@@ -638,7 +640,7 @@ export declare namespace _Sketch {
             from?: Layer,
             /** The layer in which the rectangle’s coordinates will be expressed. */
             to?: Layer,
-        })
+        }): Rectangle;
         /** Get a CGRect */
         asCGRect(): any;
         /** Get an NSRect */
@@ -704,6 +706,8 @@ export declare namespace _Sketch {
          * it in the hierarchy.
          */
         index: number;
+        /** The style of the Layer. */
+        style: Style;
         /**
          * Duplicate the Layer
          * @returns A new Layer.
@@ -732,7 +736,7 @@ export declare namespace _Sketch {
         /** access the page the layer is in */
         getParentPage(): Page;
         /** access the artboard the layer is in (if any) */
-        getParentArtboard(): Page;
+        getParentArtboard(): Artboard;
         /** access the symbol master the layer is in (if any) */
         getParentSymbolMaster(): SymbolMaster;
         /** access the shape the layer is in (if any) */
@@ -753,8 +757,6 @@ export declare namespace _Sketch {
                 text?: string,
             }[];
         });
-        /** The style of the Group. */
-        style: string
         /** The associated shared style or null. */
         sharedStyle: SharedStyle;
         /** The Layers that this component groups together. */
@@ -909,6 +911,8 @@ export declare namespace _Sketch {
             text: string,
             alignment: Alignment | VerticalAlignment,
         });
+        /** The text content of the Text */
+        text: string;
         /** The style of the Text. */
         style: Style;
         /** The associated shared style or null. */
@@ -1333,9 +1337,9 @@ export declare namespace _Sketch {
             image: ImageData | null,
             /** The scale applied to the tile of the pattern. */
             tileScale: number,
-            /** Whether the fill is active or not. */
-            enabled: boolean,
         }
+        /** Whether the fill is active or not. */
+        enabled: boolean,
     }
     /** An object that represent a Border. */
     interface Border {

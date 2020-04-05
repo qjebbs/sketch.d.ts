@@ -83,8 +83,8 @@ export declare namespace _Sketch {
             options?: {
                 /** this is the path of the folder where all exported files are placed (defaults to "`~/Documents/Sketch Exports`"). If falsey, the data for the objects are returned immediately. */
                 output?: string,
-                /** Comma separated list of formats to export to (png, jpg, svg, json or pdf) (default to "png") */
-                formats?: 'png' | 'jpg' | 'svg' | 'json' | 'pdf',
+                /** Comma separated list of formats to export to (png, jpg, svg, json, tiff, eps, webp or pdf) (default to "png") */
+                formats?: string,
                 /** Comma separated list of scales which determine the sizes at which the layers are exported (defaults to "1"). */
                 scales?: string,
                 /** Name exported images using their id rather than their name (defaults to false). */
@@ -98,7 +98,7 @@ export declare namespace _Sketch {
                 /** If exporting a PNG, remove metadata such as the colour profile from the exported file (defaults to false). */
                 'save-for-web'?: boolean,
                 /** If exporting a SVG, make the output more compact (defaults to false). */
-                compact: boolean,
+                compact?: boolean,
                 /** If exporting a SVG, include extra attributes (defaults to false). */
                 'include-namespaces'?: boolean,
                 /** If exporting a JPG, export a progressive JPEG (only used when exporting to jpeg) (defaults to false). */
@@ -106,7 +106,7 @@ export declare namespace _Sketch {
                 /** If exporting a JPG, the compression level to use fo jpeg (with 0 being the completely compressed, 1.0 no compression) (defaults to 1.0). */
                 compression?: number,
             }
-        );
+        ): Buffer | Buffer[] | Object | Object[];
         version(): { sketch: string; api: string }
         /**
          * Import a file as a Layer.
@@ -134,6 +134,17 @@ export declare namespace _Sketch {
          * Find Layers fitting some criteria.
          * @param selector The object to export.
          * @param scope The scope of the search. By default it is the current Document.
+         * @example
+         * var sketch = require('sketch/dom')
+         * sketch.find('Shape')
+         * // find all the Shapes in the current Document
+         * sketch.find('Shape')
+         * // find all the Layers in the first Page of the Document
+         * sketch.find('*', document.pages[0])
+         * // find all the Layers named "Layer-Name"
+         * sketch.find('[name="Layer-Name"]')
+         * // find all the Shape named "Layer-Name"
+         * sketch.find('Shape, [name="Layer-Name"]')
          */
         find<T>(selector: string, scope: Document | Artboard | Page | Group): T[];
         /**
@@ -752,6 +763,7 @@ export declare namespace _Sketch {
         constructor();
         constructor(options: {
             name?: string;
+            parent: Group | Artboard | Page,
             layers?: {
                 type?: Types,
                 text?: string,
@@ -775,7 +787,10 @@ export declare namespace _Sketch {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): Page;
         constructor();
-        constructor(options: { name: string })
+        constructor(options: {
+            name?: string
+            parent?: Document,
+        })
         /**
          * A method to get the Symbols Page of a Document.
          * @returns Return a Page or undefined if there is no Symbols Page yet.
@@ -801,6 +816,7 @@ export declare namespace _Sketch {
         constructor(options: {
             name?: string,
             flowStartPoint?: boolean,
+            parent?: Page,
         });
         /** A Start Point allows you to choose where to start your prototype from. */
         flowStartPoint: boolean;
@@ -819,7 +835,10 @@ export declare namespace _Sketch {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): Shape;
         constructor();
-        constructor(optoins: { name?: string, style?: Style });
+        constructor(optoins: {
+            name?: string,
+            parent?: Group | Artboard | Page,
+        });
         /** The style of the Shape. */
         style: Style;
         /** The associated shared style or null. */
@@ -843,7 +862,10 @@ export declare namespace _Sketch {
          * - an object with a base64 string: a base64 encoded image
          * @param options 
          */
-        constructor(options: { image: string });
+        constructor(options: {
+            image: string,
+            parent?: Group | Artboard | Page,
+        });
         /** The style of the Image. */
         style: Style;
         /** The associated shared style or null. */
@@ -868,8 +890,9 @@ export declare namespace _Sketch {
          * @param options 
          */
         constructor(options: {
-            name: string;
-            shapeType: ShapeType;
+            name?: string,
+            shapeType?: ShapeType,
+            parent?: Shape,
         })
         /** The style of the ShapePath. */
         style: Style;
@@ -908,8 +931,11 @@ export declare namespace _Sketch {
          * })
          */
         constructor(options: {
+            name?: string,
             text: string,
-            alignment: Alignment | VerticalAlignment,
+            parent?: Group | Artboard | Page,
+            alignment?: Alignment | VerticalAlignment,
+            /** The style of the Text. */
         });
         /** The text content of the Text */
         text: string;
@@ -936,7 +962,10 @@ export declare namespace _Sketch {
     class SymbolMaster extends Artboard {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): SymbolMaster;
-        constructor(options: { name: string });
+        constructor(options: {
+            name: string,
+            parent?: Group | Artboard | Page
+        });
         /** The unique ID of the Symbol that the master and its instances share. */
         symbolId: string;
         /** The array of the overrides that the instances of the Symbol Master will be able to change. */
@@ -986,8 +1015,9 @@ export declare namespace _Sketch {
          * @param options 
          */
         constructor(options: {
-            name: string,
+            name?: string,
             symbolId: string,
+            parent?: Group | Artboard | Page,
         })
         /** The style of the Symbol Instance. */
         style: Style;
@@ -1025,10 +1055,11 @@ export declare namespace _Sketch {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): HotSpot;
         constructor(options?: {
-            name: string,
+            name?: string,
             flow: {
                 target: Artboard,
-            }
+            },
+            parent?: Group | Artboard | Page,
         });
         /**
          * Create a new Hotspot from a Layer

@@ -132,6 +132,15 @@ export declare namespace _Sketch {
         get getGlobalGradients(): GradientAsset[];
         /**
          * Find Layers fitting some criteria.
+         * Selectors are of type string and can be the following:
+         * `name, id, frame, frame.x, frame.y, frame.width, frame.height, locked, hidden, selected, type, style.fills.color`  
+         * You can use these selectors in conjunction with an operator:
+         * `= (equal)`, `*= (contains)`, `$= (endswith)`, `!= (not equal)`, `^= (begins with)`, `>= (greater than or equal)`, `=< (less than or equal)`, `> (greater than)`, `< (less than)`
+         * 
+         * Some Selectors have shorthand notation
+         * - type: find('ShapePath', document)
+         * - id: find(`#${layer_id}`, document)or find("#91EC1D70-6A97-...-DEE84160C4F4", document)
+         * - all others: find('[="Something"]', document)
          * @param selector The object to export.
          * @param scope The scope of the search. By default it is the current Document.
          * @example
@@ -146,7 +155,7 @@ export declare namespace _Sketch {
          * // find all the Shape named "Layer-Name"
          * sketch.find('Shape, [name="Layer-Name"]')
          */
-        find<T>(selector: string, scope: Document | Artboard | Page | Group): T[];
+        find<T>(selector: string, scope?: Document | Artboard | Page | Group): T[];
         /**
          * A utility function to get a wrapped object from a native Sketch model object.
          * @param object The native Sketch model object to wrap.

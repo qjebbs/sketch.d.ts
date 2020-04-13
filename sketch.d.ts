@@ -193,7 +193,6 @@ export declare namespace _Sketch {
         static fromNative(sketchObject: object): Document;
         /** return a JSON object that represent the component */
         toJSON(): any;
-        constructor();
         constructor(options?: {
             colorSpace: ColorSpace,
         });
@@ -769,15 +768,13 @@ export declare namespace _Sketch {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): Group;
         /** Create a new Group */
-        constructor();
-        constructor(options: {
-            name?: string;
-            parent: Group | Artboard | Page,
+        constructor(options?: {
+            parent?: Group | Artboard | Page,
             layers?: {
                 type?: Types,
                 text?: string,
             }[];
-        });
+        } & ILayerConstructorOptions);
         /** The associated shared style or null. */
         sharedStyle: SharedStyle;
         /** The Layers that this component groups together. */
@@ -795,11 +792,9 @@ export declare namespace _Sketch {
     class Page extends Group {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): Page;
-        constructor();
-        constructor(options: {
-            name?: string
+        constructor(options?: {
             parent?: Document,
-        })
+        } & ILayerConstructorOptions);
         /**
          * A method to get the Symbols Page of a Document.
          * @returns Return a Page or undefined if there is no Symbols Page yet.
@@ -821,12 +816,10 @@ export declare namespace _Sketch {
     class Artboard extends Group {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): Artboard;
-        constructor();
-        constructor(options: {
-            name?: string,
+        constructor(options?: {
             flowStartPoint?: boolean,
             parent?: Page,
-        });
+        } & ILayerConstructorOptions);
         /** A Start Point allows you to choose where to start your prototype from. */
         flowStartPoint: boolean;
         /** The background of the Artboard */
@@ -843,11 +836,9 @@ export declare namespace _Sketch {
     class Shape extends Layer {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): Shape;
-        constructor();
-        constructor(optoins: {
-            name?: string,
+        constructor(optoins?: {
             parent?: Group | Artboard | Page,
-        });
+        } & ILayerConstructorOptions);
         /** The style of the Shape. */
         style: Style;
         /** The associated shared style or null. */
@@ -871,10 +862,9 @@ export declare namespace _Sketch {
          * - an object with a base64 string: a base64 encoded image
          * @param options 
          */
-        constructor(options: {
-            image: string,
+        constructor(options?: {
             parent?: Group | Artboard | Page,
-        });
+        } & ILayerConstructorOptions);
         /** The style of the Image. */
         style: Style;
         /** The associated shared style or null. */
@@ -898,11 +888,10 @@ export declare namespace _Sketch {
          * })
          * @param options 
          */
-        constructor(options: {
-            name?: string,
+        constructor(options?: {
             shapeType?: ShapeType,
             parent?: Shape,
-        })
+        } & ILayerConstructorOptions)
         /** The style of the ShapePath. */
         style: Style;
         /** The associated shared style or null. */
@@ -939,13 +928,11 @@ export declare namespace _Sketch {
          * alignment: Text.Alignment.center,
          * })
          */
-        constructor(options: {
-            name?: string,
+        constructor(options?: {
             text: string,
             parent?: Group | Artboard | Page,
             alignment?: Alignment | VerticalAlignment,
-            /** The style of the Text. */
-        });
+        } & ILayerConstructorOptions);
         /** The text content of the Text */
         text: string;
         /** The style of the Text. */
@@ -971,10 +958,9 @@ export declare namespace _Sketch {
     class SymbolMaster extends Artboard {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): SymbolMaster;
-        constructor(options: {
-            name: string,
+        constructor(options?: {
             parent?: Group | Artboard | Page
-        });
+        } & ILayerConstructorOptions);
         /** The unique ID of the Symbol that the master and its instances share. */
         symbolId: string;
         /** The array of the overrides that the instances of the Symbol Master will be able to change. */
@@ -1023,11 +1009,10 @@ export declare namespace _Sketch {
          * Create a new Symbol Instance
          * @param options 
          */
-        constructor(options: {
-            name?: string,
+        constructor(options?: {
             symbolId: string,
             parent?: Group | Artboard | Page,
-        })
+        } & ILayerConstructorOptions)
         /** The style of the Symbol Instance. */
         style: Style;
         /** The unique ID of the Symbol that the instance and its master share. */
@@ -1064,12 +1049,11 @@ export declare namespace _Sketch {
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): HotSpot;
         constructor(options?: {
-            name?: string,
             flow: {
                 target: Artboard,
             },
             parent?: Group | Artboard | Page,
-        });
+        } & ILayerConstructorOptions);
         /**
          * Create a new Hotspot from a Layer
          * @example var hotspot = HotSpot.fromLayer(layer)
@@ -1666,4 +1650,45 @@ export declare namespace _Sketch {
         string = 'string',
         selection = 'selection',
     }
+}
+
+interface ILayerConstructorOptions {
+    /** The name of the Layer */
+    name?: string;
+    /** If the layer is locked. */
+    locked?: boolean;
+    /** If the layer is hidden. */
+    hidden?: boolean;
+    /**
+     * The frame of the Layer. This is given in coordinates 
+     * that are local to the parent of the layer.
+     */
+    frame?: Rectangle;
+    /** If the layer is selected. */
+    selected?: boolean;
+    /** The prototyping action associated with the layer. */
+    flow?: Flow;
+    /** The export formats of the Layer. */
+    exportFormats?: ExportFormat[];
+    /** The transformation applied to the Layer. */
+    transform?: {
+        /** The rotation of the Layer in degrees, clock-wise. */
+        rotation?: number;
+        /** If the layer is horizontally flipped. */
+        flippedHorizontally?: boolean;
+        /** If the layer is vertically flipped. */
+        flippedVertically?: boolean;
+    };
+    /**
+     * The index of this layer in its parent. 
+     * The layer at the back of the parent (visually) 
+     * will be layer 0. The layer at the front will 
+     * be layer n - 1 (if there are n layers).
+     * 
+     * You can set the index of the layer to move 
+     * it in the hierarchy.
+     */
+    index?: number;
+    /** The style of the Layer. */
+    style?: Style;
 }

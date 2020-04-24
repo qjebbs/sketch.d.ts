@@ -258,13 +258,13 @@ export declare namespace _Sketch {
          * @returns Return a SharedStyle object or undefined if it’s not found.
          * @param sharedStyleId The ID of the shared style to find
          */
-        getSharedTextStyleWithID(sharedStyleId: string): SharedStyle
+        getSharedTextStyleWithID(sharedStyleId: string): SharedStyle;
         /**
          * A method to get all symbol masters defined in the document.
          * @returns Return an array of the SymbolMaster objects defined 
          * in the document.
          */
-        getSymbols()
+        getSymbols(): SymbolMaster[];
         /**
          * A method to help find a symbol master in the document.
          * @returns Return a SymbolMaster object or undefined if it’s not found.

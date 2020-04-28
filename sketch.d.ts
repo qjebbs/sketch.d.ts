@@ -690,7 +690,7 @@ export declare namespace _Sketch {
         /** The name of the Layer */
         name: string;
         /** The group the layer is in. */
-        parent: Group;
+        parent: Group | Artboard | Page | Document;
         /** If the layer is locked. */
         locked: boolean;
         /** If the layer is hidden. */
@@ -795,6 +795,7 @@ export declare namespace _Sketch {
         constructor(options?: {
             parent?: Document,
         } & ILayerConstructorOptions);
+        parent: Document;
         /**
          * A method to get the Symbols Page of a Document.
          * @returns Return a Page or undefined if there is no Symbols Page yet.
@@ -820,6 +821,7 @@ export declare namespace _Sketch {
             flowStartPoint?: boolean,
             parent?: Page,
         } & ILayerConstructorOptions);
+        parent: Page;
         /** A Start Point allows you to choose where to start your prototype from. */
         flowStartPoint: boolean;
         /** The background of the Artboard */

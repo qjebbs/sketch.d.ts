@@ -549,9 +549,15 @@ export declare namespace _Sketch {
         static fromStyle(options: { name: string, style: Style, document: Document }): SharedStyle;
         static get StyleType(): typeof StyleType;
     }
+    type BackTarget = object;
     /** The prototyping action associated with a layer. */
     class Flow {
-        //TODO Flow
+        /**The target artboard of the action or `Flow.BackTarget` if the action is a back action */
+        target: Artboard | BackTarget
+        targetId: string | BackTarget;
+        animationType: AnimationType;
+        static get BackTarget(): BackTarget;
+        static get AnimationType(): typeof AnimationType;
     }
     /** An export format associated with a layer. */
     class ExportFormat {
@@ -1294,7 +1300,6 @@ export declare namespace _Sketch {
     }
     /** Wrapper classes that are used to represent reusable assets retrieved from a document or globally. */
     interface Assets {
-        // TODO: verify this Assets definition
         colors: ColorAsset[],
         gradients: GradientAsset[],
     }
@@ -1651,6 +1656,19 @@ export declare namespace _Sketch {
     enum INPUT_TYPE {
         string = 'string',
         selection = 'selection',
+    }
+    /**Enumeration of the animation types. */
+    enum AnimationType {
+        /**No animation */
+        none = 'none',
+        /**Slide from the left */
+        slideFromLeft = 'slideFromLeft',
+        /**Slide from the right */
+        slideFromRight = 'slideFromRight',
+        /**Slide from the bottom */
+        slideFromBottom = 'slideFromBottom',
+        /**Slide from the top */
+        slideFromTop = 'slideFromTop',
     }
 }
 

@@ -151,6 +151,8 @@ declare global {
     type LineJoin = _Sketch.LineJoin;
     /** Enumeration of the positions of a border. */
     type INPUT_TYPE = _Sketch.INPUT_TYPE;
+    /**Enumeration of the animation types. */
+    type AnimationType = _Sketch.AnimationType;
 }
 
 // Definitions below are not exported 

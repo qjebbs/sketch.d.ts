@@ -91,6 +91,8 @@ declare global {
     type Assets = _Sketch.Assets;
     /** Wrapper classes that are used to represent reusable color assets retrieved from a document or globally. */
     type ColorAsset = _Sketch.ColorAsset;
+    /** A Color that references a Color Variable, which you can use anywhere the API expects a Color object. */
+    type Swatch = _Sketch.Swatch;
     /** Wrapper classes that are used to represent reusable gradient assets retrieved from a document or globally. */
     type GradientAsset = _Sketch.GradientAsset;
     /** An object that represent a Gradient. */

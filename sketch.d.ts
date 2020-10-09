@@ -63,6 +63,8 @@ export declare namespace _Sketch {
         Layer: typeof Layer;
         /** A Sketch Library. */
         Library: typeof Library;
+        /** A Color that references a Color Variable, which you can use anywhere the API expects a Color object. */
+        Swatch: typeof Swatch;
         /** Access all the open Documents */
         getDocuments(): Document[];
         /** Access all the Libraries */
@@ -225,6 +227,11 @@ export declare namespace _Sketch {
          * update the document colors.
          */
         colors: ColorAsset[];
+        /**
+         * A list of swatches defined in the document. 
+         * Mutating the returned array will update the document swatches.
+         */
+        swatches: Swatch[];
         /**
          * A list of gradient assets defined in the 
          * document. Mutating the returned array will 
@@ -401,6 +408,14 @@ export declare namespace _Sketch {
          * @returns An array of Shareable Object that represents the Symbols which you can import from the Library.
          */
         getImportableTextStyleReferencesForDocument(document: Document): ImportableObject[];
+        /**
+         * Get the Shared Swatches that can be imported
+         * To import a Swatch from a Library, do not access its Document and look for the Swatch directly. Instead, get the Shared Swatch References of the Library and use those to import them.
+         * Those references depends on the document you want to import them into. For example if a document has already imported a shared Swatch, it will reference the local version to keep all the instances in sync.
+         * @param document 
+         * @returns An array of Shareable Object that represents the Shared Swatches which you can import from the Library.
+         */
+        getImportableSwatchReferencesForDocument(document: Document): ImportableObject[];
         /** Enumeration of the types of Library. */
         static get LibraryType(): typeof LibraryType;
         /** Enumeration of the types of Importable Objects. */
@@ -420,7 +435,6 @@ export declare namespace _Sketch {
          * @param callback A function called after the library is added. It is called with an Error if adding the Library was unsuccessful and a Library (or undefined).
          */
         static getRemoteLibraryWithRSS(url: string, callback: (err, library: Library) => void): void;
-
     }
     /** The style of a Layer. */
     class Style extends Component {
@@ -1296,7 +1310,7 @@ export declare namespace _Sketch {
          * An Importable Object is linked to a Document so importing it will import it in the said Document.
          * @returns If the objectType of the Object is Symbol, it will return a Symbol Master which will be linked to the Library (meaning that if the Library is updated, the Symbol Instances created from the Master will be updated as well).
          */
-        import(): SymbolMaster | Style;
+        import(): SymbolMaster | Style | Swatch;
     }
     /** Wrapper classes that are used to represent reusable assets retrieved from a document or globally. */
     interface Assets {
@@ -1309,6 +1323,17 @@ export declare namespace _Sketch {
         name: string;
         /** The hex string for the color. */
         color: string;
+    }
+    /** A Color that references a Color Variable, which you can use anywhere the API expects a Color object. */
+    class Swatch {
+        static from(option: {
+            /** The name of the swatch, or null. */
+            name: string,
+            /** The hex string for the color. */
+            color: string,
+        }): Swatch;
+        /** Get a referencing Color (MSColor object) */
+        readonly referencingColor: any;
     }
     /** Wrapper classes that are used to represent reusable gradient assets retrieved from a document or globally. */
     interface GradientAsset {
@@ -1574,6 +1599,7 @@ export declare namespace _Sketch {
         Symbol = 'Symbol',
         LayerStyle = 'LayerStyle',
         TextStyle = 'TextStyle',
+        Swatch = 'Swatch',
     }
     /** Enumeration of the blending mode. */
     enum BlendingMode {

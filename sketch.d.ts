@@ -1334,6 +1334,8 @@ export declare namespace _Sketch {
         }): Swatch;
         /** Get a referencing Color (MSColor object) */
         readonly referencingColor: any;
+        /** Get color */
+        readonly color: string;
     }
     /** Wrapper classes that are used to represent reusable gradient assets retrieved from a document or globally. */
     interface GradientAsset {

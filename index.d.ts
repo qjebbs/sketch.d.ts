@@ -1,7 +1,5 @@
 import { _Sketch } from "./sketch";
 
-export = global;
-
 declare global {
     /**
     * Javascript API for Sketch without UI, Settings, DataSupplier, Async
@@ -108,7 +106,7 @@ declare global {
     /** An object that represent a Shadow. */
     type Shadow = _Sketch.Shadow;
     /**
-    * The fontAxes property allows you to adjust the parameters, or “axes”, exposed by variable fonts.  
+    * The fontAxes property allows you to adjust the parameters, or “axes”, exposed by variable fonts.
     * It works by allowing you to get and set an object representing the axes for a Text Layer’s current font. The object will only contain information about the axes supported by the Text Layer’s current font, and these will vary from font to font.
     */
     type FontAxes = _Sketch.FontAxes;
@@ -157,4 +155,80 @@ declare global {
     type AnimationType = _Sketch.AnimationType;
 }
 
-// Definitions below are not exported 
+declare const sketchDefault: Sketch;
+export default sketchDefault;
+
+export {
+    SketchDom,
+    Sketch,
+    Component,
+    Document,
+    Library,
+    Style,
+    SharedStyle,
+    Flow,
+    ExportFormat,
+    Selection,
+    CurvePoint,
+    Point,
+    Rectangle,
+    SmartLayoutObject,
+    SmartLayout,
+    Layer,
+    Group,
+    Page,
+    Artboard,
+    Shape,
+    Image,
+    ShapePath,
+    Text,
+    SymbolMaster,
+    SymbolInstance,
+    HotSpot,
+    Slice,
+    Override,
+    DataOverride,
+    Settings,
+    UI,
+    DataSupplier,
+    Async,
+    Fiber,
+    GradientStop,
+    ImageData,
+    ImportableObject,
+    Assets,
+    ColorAsset,
+    Swatch,
+    GradientAsset,
+    Gradient,
+    Blur,
+    Fill,
+    Border,
+    BorderOptions,
+    Shadow,
+    FontAxes,
+    SaveMode,
+    Types,
+    ShapeType,
+    PointType,
+    ColorSpace,
+    GradientType,
+    LineSpacing,
+    Alignment,
+    VerticalAlignment,
+    StyleType,
+    LibraryType,
+    ImportableObjectType,
+    BlendingMode,
+    BlurType,
+    FillType,
+    PatternFillType,
+    BorderPosition,
+    Arrowhead,
+    LineEnd,
+    LineJoin,
+    INPUT_TYPE,
+    AnimationType,
+};
+
+// Definitions below are not exported

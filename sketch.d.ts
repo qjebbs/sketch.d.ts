@@ -108,7 +108,7 @@ export declare namespace _Sketch {
                 /** If exporting a JPG, the compression level to use fo jpeg (with 0 being the completely compressed, 1.0 no compression) (defaults to 1.0). */
                 compression?: number,
             }
-        ): Buffer | Buffer[] | Object | Object[];
+        ): Buffer | Buffer[] | Object | Object[] | undefined;
         version(): { sketch: string; api: string }
         /**
          * Import a file as a Layer.
@@ -129,7 +129,7 @@ export declare namespace _Sketch {
          */
         get globalAssets(): Assets;
         /** The selected Document or undefined if no document is open. */
-        getSelectedDocument(): Document;
+        getSelectedDocument(): Document | undefined;
         get getGlobalColors(): ColorAsset[];
         get getGlobalGradients(): GradientAsset[];
         /**
@@ -183,7 +183,7 @@ export declare namespace _Sketch {
         /** returns the native Sketch model object. */
         get sketchObject(): any;
         /** returns a string that represent the type of the component. If it’s undefined, it means that we couldn’t match the native object and that we returned a really lightweight wrapper. */
-        get type(): Types;
+        get type(): Types | undefined;
         /** returns true if the component is wrapping an immutable version of a native Sketch model object. If that is the case, you won’t be able to mutable the object (setting any property will be a no-op). */
         isImmutable(): boolean;
         /** return a JSON object that represent the component */
@@ -246,7 +246,7 @@ export declare namespace _Sketch {
          * @returns Return a Layer object or undefined if it’s not found.
          * @param layerId The ID of the layer to find
          */
-        getLayerWithID(layerId: string): Layer;
+        getLayerWithID(layerId: string): Layer | undefined;
         /**
          * A method to help find the layers in this document which 
          * have the given name.
@@ -259,13 +259,13 @@ export declare namespace _Sketch {
          * @returns Return a SharedStyle object or undefined if it’s not found.
          * @param sharedStyleId The ID of the shared style to find
          */
-        getSharedLayerStyleWithID(sharedStyleId: string): SharedStyle;
+        getSharedLayerStyleWithID(sharedStyleId: string): SharedStyle | undefined;
         /**
          * A method to help find a shared style in the document.
          * @returns Return a SharedStyle object or undefined if it’s not found.
          * @param sharedStyleId The ID of the shared style to find
          */
-        getSharedTextStyleWithID(sharedStyleId: string): SharedStyle;
+        getSharedTextStyleWithID(sharedStyleId: string): SharedStyle | undefined;
         /**
          * A method to get all symbol masters defined in the document.
          * @returns Return an array of the SymbolMaster objects defined 
@@ -277,7 +277,7 @@ export declare namespace _Sketch {
          * @returns Return a SymbolMaster object or undefined if it’s not found.
          * @param symbolId The symbol ID of the symbol master to find
          */
-        getSymbolMasterWithID(symbolId: string): SymbolMaster;
+        getSymbolMasterWithID(symbolId: string): SymbolMaster | undefined;
         /**
          * A method to help center the view of the document window on a given layer.
          * @param layer The layer to center the view onto
@@ -333,7 +333,7 @@ export declare namespace _Sketch {
         /** Enumeration of the available color space settings. */
         static get ColorSpace(): typeof ColorSpace;
         /** The selected Document or undefined if no document is open. */
-        static getSelectedDocument(): Document;
+        static getSelectedDocument(): Document | undefined;
         /** Access all the open Documents */
         static getDocuments(): Document[];
         /**
@@ -346,7 +346,7 @@ export declare namespace _Sketch {
          * opened. It is called with an Error if opening the Document 
          * was unsuccessful and a Document (or undefined).
          */
-        static open(callback?: (err: Error, document: Document) => void);
+        static open(callback?: (err: Error, document?: Document) => void);
         /**
          * A method to open an existing sketch document or ask the 
          * user to open one. The method is asynchronous so if you 
@@ -359,7 +359,7 @@ export declare namespace _Sketch {
          * opened. It is called with an Error if opening the Document 
          * was unsuccessful and a Document (or undefined).
          */
-        static open(path: string, callback?: (err: Error, document: Document) => void);
+        static open(path: string, callback?: (err: Error, document?: Document) => void);
         static get SaveMode(): typeof SaveMode;
     }
     /** A Sketch Library. */
@@ -434,7 +434,7 @@ export declare namespace _Sketch {
          * @param url The URL to the rss feed describing the versions of the library.
          * @param callback A function called after the library is added. It is called with an Error if adding the Library was unsuccessful and a Library (or undefined).
          */
-        static getRemoteLibraryWithRSS(url: string, callback: (err, library: Library) => void): void;
+        static getRemoteLibraryWithRSS(url: string, callback: (err, library?: Library) => void): void;
     }
     /** The style of a Layer. */
     class Style extends Component {
@@ -479,21 +479,21 @@ export declare namespace _Sketch {
         /** The weight of the font of a Text Layer. Goes from 0 to 12, 0 being the thinest and 12 being the boldest. Not every weight are available for every fonts. When setting a font weight that does not exist for the current font family, the closest weight that exists will be set instead. */
         fontWeight: number;
         /** The style of the font of a Text Layer. */
-        fontStyle: 'italic' | undefined;
+        fontStyle?: 'italic';
         /** The variant of the font of a Text Layer. */
-        fontVariant: 'small-caps' | undefined;
+        fontVariant?: 'small-caps';
         /** The size variant of the font of a Text Layer. */
         fontStretch: 'compressed' | 'condensed' | 'narrow' | 'expanded' | 'poster' | undefined;
         /**
          * The underline decoration of a Text Layer.  
          * string: <line-style> [<line-pattern>] ['by-word'] / undefined where <line-style> can be single / thick / double and <line-pattern> can be dot / dash / dash-dot / dash-dot-dot
          */
-        textUnderline: string;
+        textUnderline?: string;
         /**
          * The strikethrough decoration of a Text Layer.  
          * string: <line-style> [<line-pattern>] ['by-word'] / undefined where <line-style> can be single / thick / double and <line-pattern> can be dot / dash / dash-dot / dash-dot-dot
          */
-        textStrikethrough: string;
+        textStrikethrough?: string;
         /** The axes of the Text Layer font (only available when the font is a variable font). */
         fontAxes: FontAxes;
         /**
@@ -821,7 +821,7 @@ export declare namespace _Sketch {
          * @returns Return a Page or undefined if there is no Symbols Page yet.
          * @param document The document from which you want the Symbols Page.
          */
-        static getSymbolsPage(document: Document): Page;
+        static getSymbolsPage(document: Document): Page | undefined;
         /**
          * Create the Symbols Page
          * 
@@ -1132,7 +1132,7 @@ export declare namespace _Sketch {
          * @param key The setting to look up.
          * @returns The setting that was stored for the given key. undefined if there was nothing.
          */
-        settingForKey<T>(key: string): T;
+        settingForKey<T>(key: string): T | undefined;
         /**
          * Set a plugin setting  
          * Store a value of a setting scoped to your plugin for a given key.
@@ -1146,7 +1146,7 @@ export declare namespace _Sketch {
          * @param key The setting to look up.
          * @returns The setting that was stored for the given key. undefined if there was nothing.
          */
-        globalSettingForKey<T>(key: string): T;
+        globalSettingForKey<T>(key: string): T | undefined;
         /**
          * Set a Sketch setting
          * Store a value of a Sketch setting for a given key.  
@@ -1187,7 +1187,7 @@ export declare namespace _Sketch {
          * @param key The variable to look up.
          * @returns The setting that was stored for the given key. undefined if there was nothing.
          */
-        sessionVariable<T>(key: string): T;
+        sessionVariable<T>(key: string): T | undefined;
         /**
          * Set a session setting  
          * Store a value of a variable which is persisted when the plugin finishes to run but is not persisted when Sketch closes. It is useful when you want to keep a value between plugin’s runs.
@@ -1233,7 +1233,7 @@ export declare namespace _Sketch {
                 numberOfLines?: number,
             },
             /** A function called after the user entered the input. It is called with an Error if the user canceled the input and a string or number depending on the input type (or undefined). */
-            callback?: (err, result: T) => void
+            callback?: (err, result?: T) => void
         );
         /** Get the theme of Sketch */
         getTheme(): 'light ' | ' dark';

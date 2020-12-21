@@ -781,7 +781,7 @@ export declare namespace _Sketch {
         /** access the shape the layer is in (if any) */
         getParentShape(): Shape;
         /** The Layers that this component groups together. */
-        layers: Layer[];
+        layers?: Layer[]; // https://github.com/qjebbs/sketch.d.ts/issues/2
     }
     /** A group of layers. It is also an instance of Layer so all the methods defined there are available. */
     class Group extends Layer {
@@ -815,6 +815,8 @@ export declare namespace _Sketch {
         constructor(options?: {
             parent?: Document,
         } & ILayerConstructorOptions);
+        /** The Layers that this component groups together. */
+        layers: Layer[];
         parent: Document;
         /**
          * A method to get the Symbols Page of a Document.
@@ -842,6 +844,8 @@ export declare namespace _Sketch {
             parent?: Page,
         } & ILayerConstructorOptions);
         parent: Page;
+        /** The Layers that this component groups together. */
+        layers: Layer[];
         /** A Start Point allows you to choose where to start your prototype from. */
         flowStartPoint: boolean;
         /** The background of the Artboard */
@@ -865,6 +869,8 @@ export declare namespace _Sketch {
         style: Style;
         /** The associated shared style or null. */
         sharedStyle: SharedStyle;
+        /** The Layers that this component groups together. */
+        layers: ShapePath[];
     }
     /** An image layer. */
     class Image extends Layer {
@@ -895,6 +901,8 @@ export declare namespace _Sketch {
         sharedStyleId: string | null;
         /** The actual image of the layer. */
         image: ImageData;
+        /** No sub layer for Image. */
+        layers: undefined;
     }
     /** A shape path layer. */
     class ShapePath extends Layer {
@@ -912,7 +920,7 @@ export declare namespace _Sketch {
          */
         constructor(options?: {
             shapeType?: ShapeType,
-            parent?: Shape,
+            parent?: Shape | Group,
         } & ILayerConstructorOptions)
         /** The style of the ShapePath. */
         style: Style;
@@ -926,6 +934,8 @@ export declare namespace _Sketch {
         points: CurvePoint[];
         /** If the Path is closed. */
         closed: boolean;
+        /** The Layers that this component groups together. */
+        layers?: ShapePath[];
         /** Returns a string representing the SVG path of the ShapePath. */
         getSVGPath(): string;
         /** Enumeration of the type of Shared Style. */
@@ -971,6 +981,8 @@ export declare namespace _Sketch {
         fragments: { rect, baselineOffset, range, text }[];
         /** Adjust the Text to fit its value. */
         adjustToFit(): Text;
+        /** No sub layer for Text. */
+        layers: undefined;
         /** Enumeration of the line spacing behavior for the text. */
         static get LineSpacing(): typeof LineSpacing;
         static get Alignment(): typeof Alignment;
@@ -1043,6 +1055,8 @@ export declare namespace _Sketch {
         master: SymbolMaster;
         /** The array of the overrides to modify the instance. */
         overrides: Override[];
+        /** No sub layer for SymbolInstance. */
+        layers: undefined;
         /**
          * Detach the instance.
          * Replaces a group that contains a copy of the Symbol this instance refers to. Returns null if the master contains no layers instead of inserting an empty group
@@ -1068,6 +1082,8 @@ export declare namespace _Sketch {
     }
     /** A Sketch hotspot. */
     class HotSpot extends Layer {
+        /** No sub layer for HotSpot. */
+        layers: undefined;
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): HotSpot;
         constructor(options?: {
@@ -1084,6 +1100,8 @@ export declare namespace _Sketch {
     }
     /** A Sketch slice. */
     class Slice extends Layer {
+        /** No sub layer for Slice. */
+        layers: undefined;
         /** returns a wrapped object from a native Sketch model object */
         static fromNative(sketchObject: object): HotSpot;
     }

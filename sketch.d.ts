@@ -225,6 +225,7 @@ export declare namespace _Sketch {
          * A list of color assets defined in the 
          * document. Mutating the returned array will 
          * update the document colors.
+         * @deprecated use Document.swatches instead.
          */
         colors: ColorAsset[];
         /**
@@ -1353,7 +1354,9 @@ export declare namespace _Sketch {
         /** Get a referencing Color (MSColor object) */
         readonly referencingColor: any;
         /** Get color */
-        readonly color: string;
+        color: string;
+        /** Get name */
+        name: string;
     }
     /** Wrapper classes that are used to represent reusable gradient assets retrieved from a document or globally. */
     interface GradientAsset {
